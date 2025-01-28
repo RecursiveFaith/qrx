@@ -5,50 +5,72 @@
         <style>
             :root{color-scheme:light dark}
             *{box-sizing:border-box}
-            body{overflow:hidden;background:#00807F}
+            body{overflow:hidden}
             main{display:flex;flex-direction:column}
-            iframe,textarea{flex:2}
+            iframe,textarea{flex:2;}
             html,body,main{width:101%;height:100%;margin:0}
             textarea{font-family:monospace;white-space:pre-wrap}
           </style>      
     </head>
     <body>
         <script>
-            let d = document
+            let D=document,U=URLSearchParams,L=location
             class UI{
-                constructor(o={}){
-                    this.o=o    // store options
+                constructor(O={}){
+                    this.O=O    // store options
                     ;(async () => {
-                        this.ie(o)          // initialize elements
-                        this.ae(o)          // arrange elements
-                        await this.id(o)    // initialize db
+                        await this.el(O)    // initialize and arrange elements
+                        await this.db(O)    // initialize db
+                        //await this.p(O)   // react to ?prompt
+                        //await this.h(O)   // load the hash content
+                        //await this.l(O)   // bind listeners
+                        //await this.sp(O)  // save the page
+                        //await this.lp(O)  // load the page
+                        //await this.up(O)  // update iframe
                     })()
                 }
                 
                 // Document shorthands
-                $q(q){return d.querySelector(q)}
-                $c(e){return d.createElement(e)}
+                $q(q){return D.querySelector(q)}
+                $c(e){return D.createElement(e)}
 
-                // initialize elements
-                ie(o){
-                    this.$=this.$q(o.target||'body')
-                    this.m=this.$c(o.main||'main')
-                    this.i=this.$c(o.iframe||'iframe')
-                    this.t=this.$c(o.textarea||'textarea')
-                }
-                
-                // arrange elements
-                ae(o){
+                // initialize and arrange elements
+                el(O){
+                    this.$=this.$q(O.target||'body')
+                    this.m=this.$c(O.main||'main')
+                    this.i=this.$c(O.iframe||'iframe')
+                    this.t=this.$c(O.textarea||'textarea')
                     this.$.appendChild(this.m)
                     this.m.appendChild(this.i)
                     this.m.appendChild(this.t)
                 }
 
                 // initialize database
-                async id(o){
+                async db(O){
+                    // Open IndexedDB and create object store if needed
+                    this.DB=await new Promise((r,j)=>{
+                        let q=indexedDB.open(O.name||'os',2)
+                        q.onupgradeneeded=e=>e.target.result.createObjectStore(O.name,{keyPath:O.key||'key'})
+                        q.onsuccess=e=>r(e.target.result)
+                        q.onerror=e=>j(e.target.errorCode)
+                    })                    
                 }
+
+                // Perform database operations (read/write)
+                async o(m,k,v){
+                    let s=this.DB.transaction(this.store,m).objectStore(this.store)
+                    return v?s.put({key:k,value:v}):new Promise(r=>s.get(k).onsuccess=x=>r(x.target.result?.value))
+                }                
             }
-            console.log(ui=new UI())
+
+            console.log(
+                ui=new UI({
+                    api: {
+                        key: localStorage.getItem('api.key') || localStorage.setItem('api.key',prompt('OpenRouter API Key:')),
+                        model: localStorage.getItem('api.model') || 'anthropic/claude-3.5-sonnet:beta'
+                    }
+                })
+            )
         </script>
     </body>
 </html>
