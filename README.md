@@ -85,8 +85,8 @@ The following QR codes contain an HTML file that do the same thing, but one is b
     <tr>
       <td>
         <h4><a href="https://ollama.sh">Ollama.sh</a></h4>
-        <p><a href="./qrcodes/ollama.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/qrcodes/ollama">Hosted</a></p>
-        <img src="./qrcodes/ollama.png" width=354>
+        <p><a href="./ollama.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/ollama">Hosted</a></p>
+        <img src="./ollama.png" width=354>
         <ul>
           <li>Default model: <a href="https://ollama.com/library/deepseek-r1:8b">deepseek/deepseek-r1</a>
           <li>Supports vision models</li>
@@ -95,8 +95,8 @@ The following QR codes contain an HTML file that do the same thing, but one is b
       </td>
       <td>
         <h4><a href="https://openrouter.ai">OpenRouter.ai</a></h4>
-        <p><a href="./qrcodes/openrouter.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/qrcodes/openrouter">Hosted</a></p>
-        <img src="./qrcodes/openrouter.png" width=354>
+        <p><a href="./openrouter.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/openrouter">Hosted</a></p>
+        <img src="./openrouter.png" width=354>
         <ul>
           <li>Default model: <a href="https://openrouter.ai/deepseek/deepseek-r1">deepseek/deepseek-r1</a>
           <li>Supports vision models</li>
