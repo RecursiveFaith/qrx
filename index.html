@@ -16,21 +16,39 @@
         <script>
             let d = document
             class UI{
-                constructor(t='body'){
-                    this.$=this.$q(t)
-                    this.m=this.$cE()
-                    this.i=this.$cE('iframe')
-                    this.t=this.$cE('textarea')
+                constructor(o={}){
+                    this.o=o    // store options
+                    ;(async () => {
+                        this.ie(o)          // initialize elements
+                        this.ae(o)          // arrange elements
+                        await this.id(o)    // initialize db
+                    })()
+                }
+                
+                // Document shorthands
+                $q(q){return d.querySelector(q)}
+                $c(e){return d.createElement(e)}
+
+                // initialize elements
+                ie(o){
+                    this.$=this.$q(o.target||'body')
+                    this.m=this.$c(o.main||'main')
+                    this.i=this.$c(o.iframe||'iframe')
+                    this.t=this.$c(o.textarea||'textarea')
+                }
+                
+                // arrange elements
+                ae(o){
                     this.$.appendChild(this.m)
                     this.m.appendChild(this.i)
                     this.m.appendChild(this.t)
-                    console.log(this)
                 }
-                $q(q){return d.querySelector(q)}
-                $cE(e='main'){return d.createElement(e)}
-            }
 
-            ui=new UI()
+                // initialize database
+                async id(o){
+                }
+            }
+            console.log(ui=new UI())
         </script>
     </body>
 </html>
