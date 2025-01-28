@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>qr.coach</title>
+        <style>
+            :root{color-scheme:light dark}
+            *{box-sizing:border-box}
+            body{overflow:hidden;background:#00807F}
+            main{display:flex;flex-direction:column}
+            iframe,textarea{flex:2}
+            html,body,main{width:101%;height:100%;margin:0}
+            textarea{font-family:monospace;white-space:pre-wrap}
+          </style>      
+    </head>
+    <body>
+        <script>
+            let d = document
+            class UI{
+                constructor(t='body'){
+                    this.$=this.$q(t)
+                    this.m=this.$cE()
+                    this.i=this.$cE('iframe')
+                    this.t=this.$cE('textarea')
+                    this.$.appendChild(this.m)
+                    this.m.appendChild(this.i)
+                    this.m.appendChild(this.t)
+                    console.log(this)
+                }
+                $q(q){return d.querySelector(q)}
+                $cE(e='main'){return d.createElement(e)}
+            }
+
+            ui=new UI()
+        </script>
+    </body>
+</html>
