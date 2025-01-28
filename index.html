@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>qr.coach</title>
   <style>
     :root{color-scheme:light dark}
     *{box-sizing:border-box}
@@ -16,13 +15,14 @@
   <script>
     let D=document,
     U=URLSearchParams,
+    P=Promise,
     L=location,
     LG=k=>localStorage.getItem(k),
     ro='readonly',
     rw='readwrite',
     q=(q)=>D.querySelector(q),
     c=(e)=>D.createElement(e),
-    h=(s)=>history.replaceState(s)
+    h=(a,b,c)=>{history.replaceState(a,b,c);L.reload()}
     
     class UI{
       constructor(O={}){this.s(O)}
@@ -38,6 +38,7 @@
           t.b(O)          // bind listeners
           L.hash||='#home'// Default to #home if no hash is present
           await t.ld()    // Load content for current page
+          await t.w()
           t.t.focus()     // Focus the textarea
         })()
       }
@@ -46,9 +47,9 @@
       el(O){
         let t=this
         t.$=q(O.target||'body')
-        t.m=c(O.main||'main')
-        t.i=c(O.iframe||'iframe')
-        t.t=c(O.textarea||'textarea')
+        t.m=c('main')
+        t.i=c('iframe')
+        t.t=c('textarea')
         t.$.append(t.m)
         t.m.append(t.i)
         t.m.append(t.t)
@@ -57,7 +58,7 @@
       // initialize database
       async db(O){
         // Open IndexedDB and create object store if needed
-        this.DB=await new Promise((r,j)=>{
+        this.DB=await new P((r,j)=>{
           let q=indexedDB.open(O.name||'os',2)
           q.onupgradeneeded=e=>e.target.result.createObjectStore(O.name,{keyPath:O.key||'key'})
           q.onsuccess=e=>r(e.target.result)
@@ -68,7 +69,7 @@
       // Perform database operations (read/write)
       async o(m,k,v){
         let s=this.DB.transaction(this.store,m).objectStore(this.store)
-        return v?s.put({key:k,value:v}):new Promise(r=>s.get(k).onsuccess=x=>r(x.target.result?.value))
+        return v?s.put({key:k,value:v}):new P(r=>s.get(k).onsuccess=x=>r(x.target.result?.value))
       }
       
       // Bind event listeners for input changes and navigation events
@@ -99,11 +100,12 @@
       }
       
       // Update the iframe preview with the current content and boot parameters (if any)
+      // ?b to boot
       async up(c){
-        let b = await this.o(ro,'boot') || '' // Boot
+        let b = await this.o(ro,'b') || '' // Boot
         let bP = '' // boot Param
-        if(new U(L.search).get('boot')){ 
-          bP = await Promise.all(new U(L.search).get('boot').split(',')
+        if(new U(L.search).get('b')){ 
+          bP = await P.all(new U(L.search).get('b').split(',')
           .map(k=>this.o(ro,k)))
           .then(b=>b.filter(Boolean).join('\n')) // Combine boot parameters if any are specified in URL search params
         }
@@ -112,10 +114,10 @@
         d?.close() 
       }
       
-      // ?prompt URL handling to generate or modify content
+      // ?p to prompt: URL handling to generate or modify content
       async p(){
         let p=new U(L.search)
-        if(p.get('prompt')){
+        if(p.get('p')){
           let t=this
           let c = await t.o(ro,t.h()) || '' // Load existing content
           let sp=`<url>${L.href}</url><page>${c}</page><system>${t.O.system}</system>`
@@ -126,7 +128,7 @@
             headers: {Authorization:' Bearer ' + t.O.api.key, 'Content-Type': 'application/json'},
             body: JSON.stringify({
               model: t.O.api.model,
-              messages: [{role: 'system', content: sp}, {role: 'user', content: p.get('prompt')}]
+              messages: [{role: 'system', content: sp}, {role: 'user', content: p.get('p')}]
             })
           }).then(x=>x.json())
           
@@ -135,21 +137,24 @@
           await t.sv()
           
           // Clear ?prompt from URL
-          p.set('prompt','')
-          h(null,'',L.pathname+'?'+p.toString()+L.hash)
-        }
-      }
-      // Add this method to the UI class
-      async w() {
-        let p = new U(L.search)
-        if (p.get('write')) {
-          let content = decodeURIComponent(p.get('write')) // Decode the URL-encoded value
-          let key = this.h() // Get the current hash as the key
-          await this.o(rw, key, content) // Write to the database
-          p.delete('write')
+          p.set('p','')
           h(null, '', L.pathname + '?' + p.toString() + L.hash)
         }
-      }                
+      }
+      // ?w to write the contents into the key
+      async w() {
+        let p = new U(L.search)
+        if (p.get('w')) {
+          // Write to the database
+          await this.o(
+            rw,
+            this.h(), // Get the current hash as the key
+            decodeURIComponent(p.get('w')) // Decode the URL-encoded value
+          )
+          p.delete('w')
+          h(null, '', L.pathname + '?' + p.toString() + L.hash)
+        }
+      }
     }
     
     ui=new UI(window.boot||{
