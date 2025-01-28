@@ -19,14 +19,12 @@
                 constructor(O={}){
                     this.O=O    // store options
                     ;(async () => {
-                        await this.el(O)    // initialize and arrange elements
-                        await this.db(O)    // initialize db
-                        //await this.p(O)   // react to ?prompt
-                        //await this.h(O)   // load the hash content
-                        //await this.l(O)   // bind listeners
-                        //await this.sp(O)  // save the page
-                        //await this.lp(O)  // load the page
-                        //await this.up(O)  // update iframe
+                        await this.el(O)  // initialize and arrange elements
+                        await this.db(O)  // initialize db
+                        await this.b(O)   // bind listeners
+                        L.hash||='#home'  // Default to #home if no hash is present
+                        await this.ld()   // Load content for current page
+                        this.t.focus()    // Focus the textarea
                     })()
                 }
                 
@@ -60,6 +58,44 @@
                 async o(m,k,v){
                     let s=this.DB.transaction(this.store,m).objectStore(this.store)
                     return v?s.put({key:k,value:v}):new Promise(r=>s.get(k).onsuccess=x=>r(x.target.result?.value))
+                }
+
+                // Bind event listeners for input changes and navigation events
+                b(){
+                    this.t.oninput=()=>{cancelAnimationFrame(this.S);this.S=requestAnimationFrame(()=>this.sv())} // Save on input with debounce
+                    onhashchange=()=>this.ld() // Load new page on hash change
+                }
+
+                // Save the current page's content to the database and sync it across tabs
+                async sv(){
+                    let k=L.hash.slice(1)||'home'
+                    // Only save if key is valid (not 'source' or 'reset')
+                    if(k){
+                        let v=this.t.value
+                        await this.o('readwrite',k,v) // Save to IndexedDB
+                    }
+                }
+
+                // Load content for the current page from the database and update preview
+                async ld(){
+                    let h=L.hash.slice(1)||'home' // Get current page key from hash
+                    let c=await this.o('readonly',h) // Load content from IndexedDB
+                    this.t.value=c||'' // Update textarea with loaded content or empty string
+                    this.up(c||'') // Update iframe preview with loaded content or empty string
+                }
+                
+                // Update the iframe preview with the current content and boot parameters (if any)
+                async up(c){
+                    let boot=await this.o('readonly','boot')||'' // Load boot script if present
+                    let bootParam=''
+                    if(new U(L.search).get('boot')){ 
+                    bootParam=await Promise.all(new U(L.search).get('boot').split(',')
+                        .map(k=>this.o('readonly',k)))
+                        .then(b=>b.filter(Boolean).join('\n')) // Combine boot parameters if any are specified in URL search params
+                    }
+                    let d=this.i.contentDocument 
+                    d?.write(`<!DOCTYPE html><style>:root{color-scheme:light dark}*{white-space:pre-wrap;box-sizing:border-box}body{background:#00807F}</style>${[boot,bootParam,c].filter(Boolean).join('\n')}`) 
+                    d?.close() 
                 }                
             }
 
