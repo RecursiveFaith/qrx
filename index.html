@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 0.1 -->
+<!-- 1.0 -->
 <html><head><style>
   :root{color-scheme:light dark}
   *{box-sizing:border-box}
@@ -12,9 +12,10 @@
 </style></head><body class="o"><script>
   let D=document,
   P=Promise,
+  l=localStorage,
   L=location,
   U=()=>new URLSearchParams(L.search),
-  LG=k=>localStorage.getItem(k),
+  LG=k=>l.getItem(k),
   ro='readonly',
   rw='readwrite',
   q=(q)=>D.querySelector(q),
@@ -133,7 +134,7 @@
         }).then(x=>x.json())
         
         // Update textarea and save content
-        t.t.value = r?.choices?.[0]?.message.content
+        t.t.value = r?.choices?.[0]?.message.content || r?.message.content
         await t.sv()
         
         // Clear ?prompt from URL
@@ -161,7 +162,7 @@
   ui=new UI(window.boot||{
     system: 'Regenerate ALL of <page/> including users prompt',
     apiHost: g('apiHost') || 'https://openrouter.ai/api/v1/chat/completions',
-    apiKey: g('apiKey') || localStorage.setItem('apiKey', prompt('API Key:')),
-    apiModel: g('apiModel') || localStorage.setItem('apiModel', prompt('Model:'))
+    apiKey: g('apiKey') || l.setItem('apiKey', prompt('API Key:')),
+    apiModel: g('apiModel') || l.setItem('apiModel', prompt('Model:'))
   })
 </script></body></html>

@@ -43,7 +43,7 @@ Standard QR codes offer remarkable data capacity, with Version 40 (177x177) supp
     <tr>
       <td style="text-align: center">
         <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
-          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="https://github.com/user-attachments/assets/7c3d07f4-a3f7-4296-9235-d640bba1fce2" />
+          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./andrejkarpathy.png" />
         </a>
         <div>
           <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
@@ -59,7 +59,7 @@ Standard QR codes offer remarkable data capacity, with Version 40 (177x177) supp
 
 A web browser makes a good host for an LLM OS as we can use it to spin up a local database, access device sensors and inputs and outputs, and interact with the Browser and Web APIs without any further setup
 
-The following QR codes contain an HTML file that do the same thing, but one is bootstrapped for local models and the other for cloud. This minimalist LLM OS that is bootstrapped to do the following:
+The following QR code contains a single HTML file bootstrapped to do the following:
 
 - Enable prompting through the URL by adding `?prompt`
   - `?prompt='create a working calculator'`
@@ -74,6 +74,10 @@ The following QR codes contain an HTML file that do the same thing, but one is b
   - `?boot=desktop,handsfree`
   - `#boot` is a special hash, its contents is always prefixed to every file
 
+<div style="text-align: center">
+  <img src="./llmos.png?1.0" width=354>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -85,8 +89,6 @@ The following QR codes contain an HTML file that do the same thing, but one is b
     <tr>
       <td>
         <h4><a href="https://ollama.sh">Ollama.sh</a></h4>
-        <p><a href="./ollama.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/ollama">Hosted</a></p>
-        <img src="./ollama.png" width=354>
         <ul>
           <li>Default model: <a href="https://ollama.com/library/deepseek-r1:8b">deepseek/deepseek-r1</a>
           <li>Supports vision models</li>
@@ -95,8 +97,6 @@ The following QR codes contain an HTML file that do the same thing, but one is b
       </td>
       <td>
         <h4><a href="https://openrouter.ai">OpenRouter.ai</a></h4>
-        <p><a href="./openrouter.html">Source</a>, <a href="https://recursivefaith.github.io/qrcoding/openrouter">Hosted</a></p>
-        <img src="./openrouter.png" width=354>
         <ul>
           <li>Default model: <a href="https://openrouter.ai/deepseek/deepseek-r1">deepseek/deepseek-r1</a>
           <li>Supports vision models</li>
