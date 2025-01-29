@@ -74,9 +74,7 @@ The following QR code contains a single HTML file bootstrapped to do the followi
   - `?boot=desktop,handsfree`
   - `#boot` is a special hash, its contents is always prefixed to every file
 
-<div style="text-align: center">
-  <img src="./llmos.png?1.0" width=354>
-</div>
+<img src="./llmos.png?1.0">
 
 <table>
   <thead>
