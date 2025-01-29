@@ -43,7 +43,7 @@ Standard QR codes offer remarkable data capacity, with Version 40 (177x177) supp
     <tr>
       <td style="text-align: center">
         <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
-          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./llmos.png" />
+          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./llmos.png?2" />
         </a>
         <div>
           <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
