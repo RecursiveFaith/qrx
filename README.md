@@ -1,80 +1,8 @@
-(project fork for this research: https://github.com/RecursiveFaith/qrcoding)
+## QRx - An agentic [QR Coding](https://github.com/RecursiveFaith/qrcoding) framework
 
-## Agentic QR Codes
+![image](https://github.com/user-attachments/assets/75a1f23f-2aff-485b-8c7c-82f83a6e6f60)
 
-> ***Research Questions:*** _Is it possible to create a single self-contained QR code that generates a Large Language Model (LLM) simulated Operating System (OS)? Can an LLM OS be used to generate full-dive mixed realities?_
-
-## Technical Foundation
-
-Standard QR codes offer remarkable data capacity, with Version 40 (177x177) supporting up to 2,953 bytes of raw data with error correction. QR codes are ubiquitous and can be scanned from nearly any device. The algorithm is open-sourced and has been encoded across a wide range of creative mediums:
-
-<table>
-  <tbody style="text-align: center">
-    <tr>
-      <td>
-        <a href="https://www.youtube.com/watch?v=w5ebcowAJD8">
-          <img title="Veritassium: I built a QR code with my bare hands to see how it works" 
-               src="https://img.youtube.com/vi/w5ebcowAJD8/0.jpg" 
-               width=354>
-        </a>
-        <div>
-          <a href="https://www.youtube.com/watch?v=w5ebcowAJD8">Veritassium: Physical QR Code Construction</a>
-        </div>
-      </td>
-      <td>
-        <a href="https://www.righto.com/2009/01/qr-codes-in-lego.html">
-          <img title="Ken Shirriff: QR codes in Lego" 
-               src="https://static.righto.com/images/legoqr.jpg" 
-               width=354>
-        </a>
-        <div>
-          <a href="https://www.righto.com/2009/01/qr-codes-in-lego.html">Ken Shirriff: LEGO-Encoded QR System</a>
-        </div>
-      </td>
-    </tr>    
-  </tbody>
-</table>
-
-
-"Agentic QR codes" are ones that contain all the code necessary to bootstrap an LLM OS. An LLM OS is an Operating System metaphor that imagines AI as the Central Processing Units of generative virtual machines:
-
-<table>
-  <tbody>
-    <tr>
-      <td style="text-align: center">
-        <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
-          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./llmos.png?2" />
-        </a>
-        <div>
-          <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
-            Illustrated LLM OS: An Implementational Perspective
-          </a>
-        </div>
-      </td>
-    </tr>    
-  </tbody>
-</table>
-
-## Browser implementation
-
-A web browser makes a good host for an LLM OS as we can use it to spin up a local database, access device sensors and inputs and outputs, and interact with the Browser and Web APIs without any further setup
-
-The following QR code contains a single HTML file bootstrapped to do the following:
-
-- Enable prompting through the URL by adding `?prompt`
-  - `?prompt='create a working calculator'`
-  - `?prompt='change the background to black'`
-  - `?prompt='show an animation when it calculates'`
-- Create new files in memory by changing the URLs `#hash`
-  - `#spreadsheets`
-  - `?prompt='create a working spreadsheet app'#spreadsheets`
-  - `?prompt='a page to edit the indexeddb memory of this app'#memory`
-- Prefix other files with `?boot=file`
-  - `?boot=calculator`
-  - `?boot=desktop,handsfree`
-  - `#boot` is a special hash, its contents is always prefixed to every file
-
-<img src="./qrx.png?1.0">
+> ***Ongoing research exploring:*** _Is it possible to create a single self-contained QR code that generates a Large Language Model (LLM) simulated Operating System (OS)? Can an LLM OS be used to generate full-dive mixed realities?_
 
 <table>
   <thead>
@@ -121,15 +49,11 @@ Data is persisted using the browser's IndexedDB and localStorage APIs. By defaul
 
 For production use, it's recommended to run a server (todo: explain how)
 
-<!--
-
 ### Creating a simple server
 
 When loading a file directly in the browser it's loaded in the `file://` protocol, instead of `http://`. This works but minimizes the amount of Browser APIs you have available, and if you ever move or change the file name the data could be lost
 
 It's recommended to generate your QR codes for a server. On Linux and Mac you can try `python3 -m http.server 9000`
-
--->
 
 ## Development Notes
 
