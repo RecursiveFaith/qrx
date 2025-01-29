@@ -43,7 +43,7 @@ Standard QR codes offer remarkable data capacity, with Version 40 (177x177) supp
     <tr>
       <td style="text-align: center">
         <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
-          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./andrejkarpathy.png" />
+          <img width="1440" title="Illustrated LLM OS: An Implementational Perspective" src="./llmos.png" />
         </a>
         <div>
           <a href="https://huggingface.co/blog/shivance/illustrated-llm-os">
@@ -74,7 +74,7 @@ The following QR code contains a single HTML file bootstrapped to do the followi
   - `?boot=desktop,handsfree`
   - `#boot` is a special hash, its contents is always prefixed to every file
 
-<img src="./llmos.png?1.0">
+<img src="./qrx.png?1.0">
 
 <table>
   <thead>
