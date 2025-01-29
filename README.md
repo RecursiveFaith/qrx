@@ -1,4 +1,4 @@
-(this is still a draft research project)
+(project fork for this research: https://github.com/RecursiveFaith/qrcoding)
 
 ## Agentic QR Codes
 
