@@ -1,4 +1,4 @@
-## QRx - An agentic [QR Coding](https://github.com/RecursiveFaith/qrcoding) framework
+## QRx 1.2 - An agentic [QR Coding](https://github.com/RecursiveFaith/qrcoding) framework
 
 ![image](https://github.com/user-attachments/assets/75a1f23f-2aff-485b-8c7c-82f83a6e6f60)
 
@@ -64,3 +64,6 @@ It's recommended to generate your QR codes for a server. On Linux and Mac you ca
   - Raw byte data: `17 to 2,953 bytes`
   - Numeric characters: `41 to 7,089 characters`
   - Alphanumeric: `25 to 4,296 characters`
+
+## Changelog
+250405 0029 - qrx.png had a missing semicolon this whole time 😅
