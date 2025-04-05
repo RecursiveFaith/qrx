@@ -1,6 +1,6 @@
 ## QRx 1.2 - An agentic [QR Coding](https://github.com/RecursiveFaith/qrcoding) framework
-
-![image](https://github.com/user-attachments/assets/75a1f23f-2aff-485b-8c7c-82f83a6e6f60)
+### `file:///qrx.html?prompt=generate#calculator`
+![metapixel-ezgif com-optimize(4)](https://github.com/user-attachments/assets/1af752bc-fcd4-4fec-b133-85d079031e29)
 
 > ***Ongoing research exploring:*** _Is it possible to create a single self-contained QR code that generates a Large Language Model (LLM) simulated Operating System (OS)? Can an LLM OS be used to generate full-dive mixed realities?_
 
@@ -42,7 +42,6 @@
 
 Once the LLM OS bootstrap file above is created, you can then generate QR codes that use the `?prompt#filename` pattern to prompt and control your LLM OS using QR codes
 
-
 ### The database
 
 Data is persisted using the browser's IndexedDB and localStorage APIs. By default `editor` is used as the table name. If you open these files directly in your browser without a server, the data will be mapped to that specific filename. Changing the filename would generate a new IndexedDB database (while keeping the old one)
@@ -54,6 +53,8 @@ For production use, it's recommended to run a server (todo: explain how)
 When loading a file directly in the browser it's loaded in the `file://` protocol, instead of `http://`. This works but minimizes the amount of Browser APIs you have available, and if you ever move or change the file name the data could be lost
 
 It's recommended to generate your QR codes for a server. On Linux and Mac you can try `python3 -m http.server 9000`
+
+<!-- ![image](https://github.com/user-attachments/assets/75a1f23f-2aff-485b-8c7c-82f83a6e6f60) -->
 
 ## Development Notes
 
