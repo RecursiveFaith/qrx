@@ -54,4 +54,7 @@ if(p.get('w')){await this.o(rw,this.h(),decodeURIComponent(p.get('w')))
 p.delete('w')
 h(L.pathname+'?'+p.toString()+L.hash)}}}
 let p=U(),g=(a)=>p.get(a)||LG(a)
-ui=new UI(window.boot||{system:'Regenerate ALL of <page/> including users prompt',apiHost:g('apiHost')||'https://openrouter.ai/api/v1/chat/completions',apiKey:g('apiKey')||l.setItem('apiKey',prompt('API Key:')),apiModel:g('apiModel')||l.setItem('apiModel',prompt('Model:'))})</script></body></html>
+I=(a)=>l.setItem,o={system:'Regenerate ALL of  <page /> including users prompt '}
+O=(a,b)=>{o[a]=g(a)||l.setItem(a,prompt(a,b)||b)}
+O('apiHost','https://openrouter.ai/api/v1/chat/completions');O('apiKey');O('apiModel')
+ui=new UI(window.boot||o)</script></body></html>
